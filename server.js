@@ -24,6 +24,39 @@ connection.connect(function (err) {
     console.log('Connected to the MySQL server.');
 });
 
+app.get('/process_getdata', function (req, res) {
+    connection.query('CALL new_procedure', function (error, results, fields) {
+        if (error) {
+            throw error
+        } else {
+            res.json(results)
+        }
+    })
+})
+
+// 
+app.get('/process_postdata', function (req, res) {
+    let obj = { fname: '', lname: '' }
+    connection.query('CALL new_procedureFORINSERT', [obj], function (error, results, fields) {
+        if (error) {
+            throw error
+        } else {
+            res.json(results)
+        }
+    })
+})
+
+app.get('/process_updatedata', function (req, res) {
+    let id = 1;
+    connection.query('CALL new_procedureFORUPDATE', [id], function (error, results, fields) {
+        if (error) {
+            throw error
+        } else {
+            res.json(results)
+        }
+    })
+})
+
 app.get('/process_get', function (req, res) {
     response = {
         first_name: 'John',
