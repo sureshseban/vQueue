@@ -72,8 +72,8 @@ app.post('/process_post', urlencodedParser, function (req, res) {
         first_name: req.body.first_name,
         last_name: req.body.last_name
     };
-    console.log(response);
-    res.end(JSON.stringify(response));
+    console.log(response.first_name + ' ' + response.last_name);
+    res.end(JSON.stringify(response.first_name + ' ' + response.last_name));
 })
 
 // ports : http : 80, https: 443, custom : 5000
