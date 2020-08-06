@@ -5,6 +5,26 @@ let mysql = require('mysql');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: 'process get',
+            description: 'Process API informtion',
+            contact: {
+                name: 'Developer'
+            },
+            servers: ['http://127.0.0.1']
+        }
+    },
+    apis: ['server.js']
+}
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
 app.use(express.static('public'));
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/" + "index.html");
@@ -57,6 +77,15 @@ app.get('/process_updatedata', function (req, res) {
     })
 })
 
+/**
+ * @swagger
+ * /process_get:
+ *   get:
+ *      description: use to get process information
+ *      responses:
+ *          '200':
+ *              description: A succesful response
+ */
 app.get('/process_get', function (req, res) {
     response = {
         first_name: 'John',
@@ -66,6 +95,17 @@ app.get('/process_get', function (req, res) {
     res.end(JSON.stringify(response));
 })
 
+/**
+ * @swagger
+ * /process_post:
+ *   post:
+ *      description: use to update process information
+ *      responses:
+ *          '200':
+ *              description: A succesful response
+ *          '404':
+ *              description: API doesn't exists
+ */
 app.post('/process_post', urlencodedParser, function (req, res) {
     console.log(req);
     response = {
