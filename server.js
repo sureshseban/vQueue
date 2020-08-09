@@ -3,7 +3,6 @@ var app = express();
 
 let mysql = require('mysql');
 var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
@@ -21,6 +20,8 @@ const swaggerOptions = {
     },
     apis: ['server.js']
 }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
@@ -54,7 +55,6 @@ app.get('/process_getdata', function (req, res) {
     })
 })
 
-// 
 app.get('/process_postdata', function (req, res) {
     let obj = { fname: '', lname: '' }
     connection.query('CALL new_procedureFORINSERT', [obj], function (error, results, fields) {
@@ -79,11 +79,30 @@ app.get('/process_updatedata', function (req, res) {
 
 /**
  * @swagger
+ * definitions:
+ *   Name:
+ *     properties:
+ *       first_name:
+ *         type: string
+ *       last_name:
+ *         type: string
+ */
+
+/**
+ * @swagger
  * /process_get:
  *   get:
+ *      tags:
+*           - api
  *      description: use to get process information
+ *      produces:
+ *          - application/json
+ *      consumes:
+ *          - application/json
  *      responses:
  *          '200':
+ *              schema:
+ *                  $ref: '#/definitions/Name'
  *              description: A succesful response
  */
 app.get('/process_get', function (req, res) {
@@ -95,19 +114,33 @@ app.get('/process_get', function (req, res) {
     res.end(JSON.stringify(response));
 })
 
+
 /**
  * @swagger
  * /process_post:
  *   post:
- *      description: use to update process information
- *      responses:
- *          '200':
- *              description: A succesful response
- *          '404':
- *              description: API doesn't exists
+ *     tags:
+ *       - api
+ *     description: returns full name
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: puppy
+ *         description: Name object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Name'
+ *     responses:
+ *       200:
+ *         description: Successfully created
  */
-app.post('/process_post', urlencodedParser, function (req, res) {
-    console.log(req);
+app.post('/process_post', function (req, res) {
+    // console.log(JSON.stringify(req));
+    // const R = 6371e3;
+    // const sin = Math.sin, cos = Math.cos, acos = Math.acos;
+    // const pie = Math.PI;
+
     response = {
         first_name: req.body.first_name,
         last_name: req.body.last_name
@@ -116,9 +149,6 @@ app.post('/process_post', urlencodedParser, function (req, res) {
     res.end(JSON.stringify(response.first_name + ' ' + response.last_name));
 })
 
-// ports : http : 80, https: 443, custom : 5000
-
-var server = app.listen(80, function () {
-    console.log(__dirname);
-    console.log('http://127.0.0.1:80/');
+app.listen(80, function () {
+    console.log('server started - http://127.0.0.1:80/');
 })
