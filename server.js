@@ -10,8 +10,8 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: 'process get',
-            description: 'Process API informtion',
+            title: 'Virtual Queue',
+            description: 'VQ API Documentation',
             contact: {
                 name: 'Developer'
             },
@@ -32,10 +32,10 @@ app.get('/', function (req, res) {
 })
 
 let connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'mysql@123',
-    database: 'virtualqueue'
+    host: 'weq.csbuoireovxd.ap-south-1.rds.amazonaws.com',
+    user: 'weqadmin',
+    password: 'weq123admin',
+    database: 'weq'
 });
 
 connection.connect(function (err) {
@@ -80,31 +80,35 @@ app.get('/process_updatedata', function (req, res) {
 /**
  * @swagger
  * definitions:
- *   Name:
- *     properties:
- *       first_name:
- *         type: string
- *       last_name:
- *         type: string
+ *   Branch:
+ *      properties:
+ *       userID:
+ *         type: number
+ *       radius:
+ *         type: number
+ *       lat:
+ *         type: number
+ *       long:
+ *         type: number
  */
 
-/**
- * @swagger
- * /process_get:
- *   get:
- *      tags:
-*           - api
- *      description: use to get process information
- *      produces:
- *          - application/json
- *      consumes:
- *          - application/json
- *      responses:
- *          '200':
- *              schema:
- *                  $ref: '#/definitions/Name'
- *              description: A succesful response
- */
+// /**
+//  * @swagger
+//  * /process_get:
+//  *   get:
+//  *      tags:
+// *           - api
+//  *      description: use to get process information
+//  *      produces:
+//  *          - application/json
+//  *      consumes:
+//  *          - application/json
+//  *      responses:
+//  *          '200':
+//  *              schema:
+//  *                  $ref: '#/definitions/Name'
+//  *              description: A succesful response
+//  */
 app.get('/process_get', function (req, res) {
     response = {
         first_name: 'John',
@@ -115,38 +119,74 @@ app.get('/process_get', function (req, res) {
 })
 
 
-/**
- * @swagger
- * /process_post:
- *   post:
- *     tags:
- *       - api
- *     description: returns full name
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: puppy
- *         description: Name object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Name'
- *     responses:
- *       200:
- *         description: Successfully created
- */
+// /**
+//  * @swagger
+//  * /process_post:
+//  *   post:
+//  *     tags:
+//  *       - api
+//  *     description: returns full name
+//  *     produces:
+//  *       - application/json
+//  *     parameters:
+//  *       - name: puppy
+//  *         description: Name object
+//  *         in: body
+//  *         required: true
+//  *         schema:
+//  *           $ref: '#/definitions/Name'
+//  *     responses:
+//  *       200:
+//  *         description: Successfully created
+//  */
 app.post('/process_post', function (req, res) {
-    // console.log(JSON.stringify(req));
-    // const R = 6371e3;
-    // const sin = Math.sin, cos = Math.cos, acos = Math.acos;
-    // const pie = Math.PI;
-
     response = {
         first_name: req.body.first_name,
         last_name: req.body.last_name
     };
     console.log(response.first_name + ' ' + response.last_name);
     res.end(JSON.stringify(response.first_name + ' ' + response.last_name));
+})
+
+/**
+ * @swagger
+ * /branchdetails:
+ *   post:
+ *     tags:
+ *       - Branch Details
+ *     description: returns all branch details
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: branch
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Branch'
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+app.post('/branchdetails', function (req, res) {
+    const R = 6371e3;
+    const cos = Math.cos;
+    const pie = Math.PI;
+    const UserID = req.body.userID;
+    const radius = Number(req.body.radius);
+    const lat = Number(req.body.lat)
+    const long = Number(req.body.long)
+
+    const MinLatitude = lat - radius / R * 180 / pie; // 0.00000000
+    const MaxLatitude = lat + radius / R * 180 / pie; // 0.00000000
+    const MinLongitude = (long - radius / R * 180 / pie) / (cos(lat * pie / 180)) // 0.00000000
+    const MaxLongitude = (long + radius / R * 180 / pie) / (cos(lat * pie / 180)) // 0.00000000
+    connection.query("CALL GetBranchDetail('" + UserID + "', '" + MinLatitude + "', '" + MaxLatitude + "', '" + MinLongitude + "', '" + MaxLongitude + "')", function (error, results, fields) {
+        if (error) {
+            throw error
+        } else {
+            res.json(results.length ? results[0] : []);
+        }
+    })
 })
 
 app.listen(80, function () {
