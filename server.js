@@ -73,9 +73,9 @@ app.listen(80, function () {
  *         type: string
  *       maximumBookingCount:
  *         type: number
- *       SlotStartTime:
+ *       slotStartTime:
  *         type: string
- *       SlotEndTime:
+ *       slotEndTime:
  *         type: string
  *   EditMySlot:
  *      properties:
@@ -143,7 +143,9 @@ app.post('/getbranchdetail', function (req, res) {
         if (error) {
             throw error
         } else {
-            res.json(results);
+            res.json({
+                data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {}
+            });
         }
     })
 })
@@ -172,7 +174,9 @@ app.post('/getslotdetail', function (req, res) {
         if (error) {
             throw error
         } else {
-            res.json(results);
+            res.json({
+                data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {}
+            });
         }
     })
 })
@@ -201,7 +205,9 @@ app.post('/bookmyslot', function (req, res) {
         if (error) {
             throw error
         } else {
-            res.json(results);
+            res.json({
+                data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {}
+            });
         }
     })
 })
@@ -230,7 +236,9 @@ app.post('/editmyslot', function (req, res) {
         if (error) {
             throw error
         } else {
-            res.json(results);
+            res.json({
+                data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {}
+            });
         }
     })
 })
