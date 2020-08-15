@@ -105,6 +105,22 @@ app.listen(80, function () {
  *         type: number
  *       bookingUniqueID:
  *         type: number
+ *   RegisterUser:
+ *      properties:
+ *       firstName:
+ *         type: string
+ *       lastName:
+ *         type: string
+ *       userName:
+ *         type: string
+ *       userPassword:
+ *         type: string
+ *       userEmail:
+ *         type: string
+ *       phoneNumber:
+ *         type: string
+ *       roleID:
+ *         type: number
  */
 
 /**
@@ -264,6 +280,62 @@ app.post('/editmyslot', function (req, res) {
  */
 app.post('/cancelmyslot', function (req, res) {
     connection.query("CALL CancelMySlot('" + req.body.userID + "', '" + req.body.branchID + "', '" + req.body.bookingID + "', '" + req.body.bookingUniqueID + "')", function (error, results) {
+        if (error) {
+            throw error
+        } else {
+            res.json(results);
+        }
+    })
+})
+
+
+/**
+ * @swagger
+ * /getroledetail:
+ *   post:
+ *     tags:
+ *       - Get Roles
+ *     description: Get user Roles
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+app.post('/getroledetail', function (req, res) {
+    connection.query("CALL GetRoleDetail", function (error, results) {
+        if (error) {
+            throw error
+        } else {
+            res.json({
+                data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {}
+            });
+        }
+    })
+})
+
+
+/**
+ * @swagger
+ * /registeruser:
+ *   post:
+ *     tags:
+ *       - User Registartion
+ *     description: User Registartion
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: RegisterUser
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/RegisterUser'
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+app.post('/registeruser', function (req, res) {
+    connection.query("CALL RegisterUser('" + req.body.firstName + "', '" + req.body.lastName + "', '" + req.body.userName + "', '" + req.body.userPassword + "','" + req.body.userEmail + "', '" + req.body.phoneNumber + "', '" + req.body.roleID + "')", function (error, results) {
         if (error) {
             throw error
         } else {
