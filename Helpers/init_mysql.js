@@ -1,10 +1,10 @@
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
-    host: process.env.HOSTNAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    host: 'weq.csbuoireovxd.ap-south-1.rds.amazonaws.com',
+    user: 'weqadmin',
+    password: 'weq123admin',
+    database: 'weq'
 })
 
 connection.connect(err => {

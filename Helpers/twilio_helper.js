@@ -1,14 +1,14 @@
 const createError = require('http-errors')
-const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, {
-    lazyLoading: true
-})
 
 module.exports = {
     sendOTP: (phoneNumber) => {
         return new Promise((resolve, reject) => {
+            const client = require('twilio')('', '', {
+                lazyLoading: true
+            })
             client
                 .verify
-                .services(process.env.TWILIO_SERVICE_ID)
+                .services('')
                 .verifications
                 .create({
                     to: `+91${phoneNumber}`,
@@ -20,9 +20,12 @@ module.exports = {
     },
     verifyOTP: (phoneNumber, code) => {
         return new Promise((resolve, reject) => {
+            const client = require('twilio')('', '', {
+                lazyLoading: true
+            })
             client
                 .verify
-                .services(process.env.TWILIO_SERVICE_ID)
+                .services('')
                 .verificationChecks
                 .create({
                     to: `+91${phoneNumber}`,

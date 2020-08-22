@@ -53,7 +53,6 @@ app.use((err, req, res, next) => {
     })
 })
 
-const PORT = process.env.PORT
-app.listen(PORT, () => {
+app.listen(80, () => {
     console.log('app is running')
 })

@@ -5,10 +5,10 @@ module.exports = {
     signAccessToken: (userId) => {
         return new Promise((resolve, reject) => {
             const payload = {}
-            const secret = process.env.ACCESS_TOKEN_SECRET
+            const secret = '5a6093ab9797fe1bcaab93b0a32e0754f0ef12f562633535c8438caba11d4070'
             const options = {
-                expiresIn: process.env.ACCESS_TOKEN_EXPIRESIN,
-                issuer: process.env.ACCESS_TOKEN_ISSUER,
+                expiresIn: '365d',
+                issuer: 'http://ec2-52-15-191-227.us-east-2.compute.amazonaws.com/',
                 audience: userId.toString() + Date.parse(new Date()).toString()
             }
             JWT.sign(payload, secret, options, (err, token) => {
@@ -23,7 +23,8 @@ module.exports = {
             const authHeader = req.headers['authorization']
             const bearerToken = authHeader.split(' ')
             const token = bearerToken[1]
-            JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+            const secret = '5a6093ab9797fe1bcaab93b0a32e0754f0ef12f562633535c8438caba11d4070'
+            JWT.verify(token, secret, (err, payload) => {
                 if (err) return next(createError.Unauthorized())
                 req.payload = payload
                 next()
