@@ -18,19 +18,19 @@ module.exports = {
         })
     },
     verifyAccessToken: (req, res, next) => {
-        try {
-            // if (!req.headers['authorization']) return next(createError.Unauthorized())
-            // const authHeader = req.headers['authorization']
-            // const bearerToken = authHeader.split(' ')
-            // const token = bearerToken[1]
-            // const secret = ''
-            // JWT.verify(token, secret, (err, payload) => {
-            //     if (err) return next(createError.Unauthorized())
-            //     req.payload = payload
-            //     next()
-            // })
-        } catch{
-            next(createError.InternalServerError())
-        }
+        // try {
+            if (!req.headers['authorization']) return next(createError.Unauthorized())
+            const authHeader = req.headers['authorization']
+            const bearerToken = authHeader.split(' ')
+            const token = bearerToken[1]
+            const secret = ''
+            JWT.verify(token, secret, (err, payload) => {
+                if (err) return next(createError.Unauthorized())
+                req.payload = payload
+                next()
+            })
+        // } catch{
+        //     next(createError.InternalServerError())
+        // }
     }
 }
