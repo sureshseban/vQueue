@@ -9,6 +9,7 @@ require('./Helpers/init_mysql')
 const AuthRoute = require('./Routes/auth.route')
 const BranchRoute = require('./Routes/branch.route')
 const SlotRoute = require('./Routes/slot.route')
+const BookingRoute = require('./Routes/booking.route')
 const { verifyAccessToken } = require('./Helpers/jwt-helper')
 
 const swaggerOptions = {
@@ -38,6 +39,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/auth', AuthRoute)
 app.use('/branch', BranchRoute)
 app.use('/slot', SlotRoute)
+app.use('/booking', BookingRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())
