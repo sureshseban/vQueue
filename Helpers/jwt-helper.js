@@ -5,7 +5,7 @@ module.exports = {
     signAccessToken: (userId) => {
         return new Promise((resolve, reject) => {
             const payload = {}
-            const secret = ''
+            const secret = '5a6093ab9797fe1bcaab93b0a32e0754f0ef12f562633535c8438caba11d4070'
             const options = {
                 expiresIn: '365d',
                 issuer: 'http://ec2-52-15-191-227.us-east-2.compute.amazonaws.com/',
@@ -18,19 +18,19 @@ module.exports = {
         })
     },
     verifyAccessToken: (req, res, next) => {
-        // try {
+        try {
             if (!req.headers['authorization']) return next(createError.Unauthorized())
             const authHeader = req.headers['authorization']
             const bearerToken = authHeader.split(' ')
             const token = bearerToken[1]
-            const secret = ''
+            const secret = '5a6093ab9797fe1bcaab93b0a32e0754f0ef12f562633535c8438caba11d4070'
             JWT.verify(token, secret, (err, payload) => {
                 if (err) return next(createError.Unauthorized())
                 req.payload = payload
                 next()
             })
-        // } catch{
-        //     next(createError.InternalServerError())
-        // }
+        } catch (err) {
+            next(createError.InternalServerError())
+        }
     }
 }
