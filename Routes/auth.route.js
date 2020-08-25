@@ -11,10 +11,8 @@ router.post('/register', async (req, res, next) => {
         if (!firstName || !lastName || !phoneNumber) return next(createError.BadRequest())
         connection.query("CALL RegisterUser('" + firstName + "', '" + lastName + "', '" + userEmail + "', '" + phoneNumber + "' )", (error, results) => {
             if (error) { return next(createError.InternalServerError()) } else {
-                //need to discuss the possible exceptions from sp
-                // res.json(results)
                 signAccessToken(phoneNumber).then((accessToken) => {
-                    res.send({ accessToken: accessToken })
+                    res.json({ accessToken: accessToken, userID: results[0][0].UserID })
                 })
             }
         })
@@ -30,9 +28,11 @@ router.post('/login', async (req, res, next) => {
         connection.query("CALL GetPhoneNumberStatus( '" + phoneNumber + "')", (error, results) => {
             if (error) { return next(createError.InternalServerError()) } else {
                 const isExists = results[0][0].IsExist
+                const userID = results[0][0].UserID
                 sendOTP(phoneNumber).then(message => {
                     message.isExists = isExists
-                    res.send({ otp: message })
+                    message.userID = userID
+                    res.json({ otp: message })
                 })
             }
         })
@@ -49,11 +49,11 @@ router.post('/verify', async (req, res, next) => {
             if (message.status === 'approved') {
                 if (isExists) {
                     signAccessToken(phoneNumber).then((accessToken) => {
-                        res.send({ accessToken: accessToken })
+                        res.json({ accessToken: accessToken })
                     })
                 } else {
                     message.isExists = 0
-                    res.send(message)
+                    res.json(message)
                 }
             } else {
                 next(createError.InternalServerError())

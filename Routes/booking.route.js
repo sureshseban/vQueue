@@ -22,7 +22,7 @@ router.post('/edit', verifyAccessToken, async (req, res, next) => {
         const { userID, bookingID, bookingUniqueID, branchID, startDate, endDate } = req.body
         connection.query("CALL GetBookingEditDetail('" + userID + "', '" + bookingID + "', '" + bookingUniqueID + "','" + branchID + "', '" + startDate + "', '" + endDate + "')", (error, results) => {
             if (error) { next(createError.InternalServerError()) } else {
-                res.send({ data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {} })
+                res.json({ data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {} })
             }
         })
     } catch (error) {
