@@ -12,6 +12,8 @@ const SlotRoute = require('./Routes/slot.route')
 const BookingRoute = require('./Routes/booking.route')
 const { verifyAccessToken } = require('./Helpers/jwt-helper')
 
+const AdminSlotRoute = require('./Routes/admin/slot.route')
+
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
@@ -40,6 +42,8 @@ app.use('/auth', AuthRoute)
 app.use('/branch', BranchRoute)
 app.use('/slot', SlotRoute)
 app.use('/booking', BookingRoute)
+
+app.use('/admin/slot', AdminSlotRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())
