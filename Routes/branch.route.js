@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 const connection = require('../Helpers/init_mysql')
-const {verifyAccessToken} = require('../Helpers/jwt-helper')
+const { verifyAccessToken } = require('../Helpers/jwt-helper')
 
 router.post('/details', verifyAccessToken, async (req, res, next) => {
     try {

@@ -10,6 +10,8 @@ const AuthRoute = require('./Routes/auth.route')
 const BranchRoute = require('./Routes/branch.route')
 const SlotRoute = require('./Routes/slot.route')
 const BookingRoute = require('./Routes/booking.route')
+const ProfileRoute = require('./Routes/profile.route')
+
 const { verifyAccessToken } = require('./Helpers/jwt-helper')
 
 const AdminSlotRoute = require('./Routes/admin/slot.route')
@@ -42,6 +44,7 @@ app.use('/auth', AuthRoute)
 app.use('/branch', BranchRoute)
 app.use('/slot', SlotRoute)
 app.use('/booking', BookingRoute)
+app.use('/profile', ProfileRoute)
 
 app.use('/admin/slot', AdminSlotRoute)
 
