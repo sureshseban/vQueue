@@ -1,9 +1,10 @@
 const express = require('express')
+var cors = require('cors')
 const createError = require('http-errors')
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const bodyParser = require('body-parser')
-require('dotenv').config()
+// require('dotenv').config()
 require('./Helpers/init_mysql')
 
 const AuthRoute = require('./Routes/auth.route')
@@ -15,6 +16,9 @@ const ProfileRoute = require('./Routes/profile.route')
 const { verifyAccessToken } = require('./Helpers/jwt-helper')
 
 const AdminSlotRoute = require('./Routes/admin/slot.route')
+
+// Super Admin
+const SuperAdminAuthRoute = require('./Routes/super-admin/auth.route')
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -34,10 +38,12 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 const app = express()
 
 app.get('/', verifyAccessToken, async (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send('Hellow World')
 })
 
 app.use(express.json())
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/auth', AuthRoute)
@@ -47,6 +53,7 @@ app.use('/booking', BookingRoute)
 app.use('/profile', ProfileRoute)
 
 app.use('/admin/slot', AdminSlotRoute)
+app.use('/superadmin/auth', SuperAdminAuthRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())

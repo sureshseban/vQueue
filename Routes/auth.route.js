@@ -26,6 +26,8 @@ router.post('/login', async (req, res, next) => {
         const { phoneNumber } = req.body
         if (!phoneNumber) return next(createError.BadRequest())
         connection.query("CALL GetPhoneNumberStatus( '" + phoneNumber + "')", (error, results) => {
+            console.log(error);
+            console.log(results);
             if (error) { return next(createError.InternalServerError()) } else {
                 const isExists = results[0][0].IsExist
                 const userID = results[0][0].UserID
