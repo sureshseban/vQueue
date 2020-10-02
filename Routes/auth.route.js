@@ -12,7 +12,7 @@ router.post('/register', async (req, res, next) => {
         connection.query("CALL RegisterUser('" + firstName + "', '" + lastName + "', '" + userEmail + "', '" + phoneNumber + "' )", (error, results) => {
             if (error) { return next(createError.InternalServerError()) } else {
                 signAccessToken(phoneNumber).then((accessToken) => {
-                    res.json({ accessToken: accessToken, userID: results[0][0].UserID })
+                    res.json({ accessToken: accessToken, userID: results[0][0].UserID, userName: results[0][0].UserName, roleID: results[0][0].RoleID })
                 })
             }
         })
@@ -26,14 +26,16 @@ router.post('/login', async (req, res, next) => {
         const { phoneNumber } = req.body
         if (!phoneNumber) return next(createError.BadRequest())
         connection.query("CALL GetPhoneNumberStatus( '" + phoneNumber + "')", (error, results) => {
-            console.log(error);
-            console.log(results);
             if (error) { return next(createError.InternalServerError()) } else {
                 const isExists = results[0][0].IsExist
                 const userID = results[0][0].UserID
+                const userName = results[0][0].UserName
+                const roleID = results[0][0].RoleID
                 sendOTP(phoneNumber).then(message => {
                     message.isExists = isExists
                     message.userID = userID
+                    message.userName = userName
+                    message.roleID = roleID
                     res.json({ otp: message })
                 })
             }

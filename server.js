@@ -4,7 +4,6 @@ const createError = require('http-errors')
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const bodyParser = require('body-parser')
-// require('dotenv').config()
 require('./Helpers/init_mysql')
 
 const AuthRoute = require('./Routes/auth.route')
@@ -19,6 +18,7 @@ const AdminSlotRoute = require('./Routes/admin/slot.route')
 
 // Super Admin
 const SuperAdminAuthRoute = require('./Routes/super-admin/auth.route')
+const SuperAdminBranchRoute = require('./Routes/super-admin/branch.route')
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -54,6 +54,7 @@ app.use('/profile', ProfileRoute)
 
 app.use('/admin/slot', AdminSlotRoute)
 app.use('/superadmin/auth', SuperAdminAuthRoute)
+app.use('/superadmin/branch', SuperAdminBranchRoute)
 
 app.use(async (req, res, next) => {
     next(createError.NotFound())
