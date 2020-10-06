@@ -9,7 +9,23 @@ router.post('/register', async (req, res, next) => {
         const { ClientName, FirstName, LastName, UserEmail, PhoneNumber } = req.body
         connection.query("CALL RegisterSuperAdmin('" + ClientName + "', '" + FirstName + "', '" + LastName + "', '" + UserEmail + "', '" + PhoneNumber + "')", (error, results) => {
             if (error) { next(createError.InternalServerError()) } else {
-                res.json({ data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {} })
+                if (results[0][0].IsExist) {
+                    res.json({ IsExist: 1 })
+                } else {
+                    const Name = results[0][0].UserName
+                    const UserID = results[0][0].UserID
+                    const RoleID = results[0][0].RoleID
+                    const ClientID = results[0][0].ClientID
+                    const ClientName = results[0][0].ClientName
+                    sendOTP(PhoneNumber).then(message => {
+                        message.UserID = UserID
+                        message.Name = Name
+                        message.RoleID = RoleID
+                        message.ClientID = ClientID
+                        message.ClientName = ClientName
+                        res.json({ otp: message, IsExist: 0 })
+                    })
+                }
             }
         })
     } catch (error) {
@@ -29,10 +45,14 @@ router.post('/login', async (req, res, next) => {
                     const Name = results[0][0].UserName
                     const UserID = results[0][0].UserID
                     const RoleID = results[0][0].RoleID
+                    const ClientID = results[0][0].ClientID
+                    const ClientName = results[0][0].ClientName
                     sendOTP(PhoneNumber).then(message => {
                         message.UserID = UserID
                         message.Name = Name
                         message.RoleID = RoleID
+                        message.ClientID = ClientID
+                        message.ClientName = ClientName
                         res.json({ otp: message, IsExist: 1 })
                     })
                 }
