@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a450b668.chunk.css",
+    "main.js": "/static/js/main.88fc0980.chunk.js",
+    "main.js.map": "/static/js/main.88fc0980.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1ba291e1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1ba291e1.js.map",
+    "static/css/2.99a5358a.chunk.css": "/static/css/2.99a5358a.chunk.css",
+    "static/js/2.da149e4d.chunk.js": "/static/js/2.da149e4d.chunk.js",
+    "static/js/2.da149e4d.chunk.js.map": "/static/js/2.da149e4d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.802212d6f57935a53df0cf8e0cfef01f.js": "/precache-manifest.802212d6f57935a53df0cf8e0cfef01f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.99a5358a.chunk.css.map": "/static/css/2.99a5358a.chunk.css.map",
+    "static/css/main.a450b668.chunk.css.map": "/static/css/main.a450b668.chunk.css.map",
+    "static/js/2.da149e4d.chunk.js.LICENSE.txt": "/static/js/2.da149e4d.chunk.js.LICENSE.txt",
+    "static/media/Pointer.svg": "/static/media/Pointer.bb4ed5c4.svg",
+    "static/media/Shopping Cart-ico.svg": "/static/media/Shopping Cart-ico.0f4db4a5.svg",
+    "static/media/WEQ-logo.svg": "/static/media/WEQ-logo.081c1cf8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1ba291e1.js",
+    "static/css/2.99a5358a.chunk.css",
+    "static/js/2.da149e4d.chunk.js",
+    "static/css/main.a450b668.chunk.css",
+    "static/js/main.88fc0980.chunk.js"
+  ]
+}

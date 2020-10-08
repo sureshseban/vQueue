@@ -4,6 +4,7 @@ const createError = require('http-errors')
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const bodyParser = require('body-parser')
+const path = require("path")
 require('./Helpers/init_mysql')
 
 const AuthRoute = require('./Routes/auth.route')
@@ -37,10 +38,17 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
 const app = express()
 
-app.get('/', verifyAccessToken, async (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.send('Hellow World')
-})
+// app.get('/', verifyAccessToken, async (req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.send('Hellow World')
+// })
+
+// app.get("/", (req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.sendFile(path.join(__dirname, "build", "index.html"));
+// })
+
+app.use(express.static("build"))
 
 app.use(express.json())
 app.use(cors())
