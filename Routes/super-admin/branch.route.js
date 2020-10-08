@@ -54,7 +54,7 @@ router.post('/addbranch', async (req, res, next) => {
             EntryInEachSlot,
             WorkingDayList,
             BranchImage } = req.body
-        connection.query("CALL AddBranchDetail('" + UserID + "', '" + BranchName + "','" + CategoryID + "', '" + ClientID + "', '" + BranchPhoneNumber + "', '" + BranchEmailID + "','" + IsBranchSupervisor + "', '" + AdminPhoneNumber + "','" + BuildingNumber + "', '" + StreetName + "','" + City + "', '" + State + "','" + Country + "', '" + Pincode + "','" + Latitude + "', '" + Longitude + "','" + BranchStartTime + "', '" + BranchEndTime + "','" + SlotInMinutes + "', '" + MaximumBookingCount + "','" + EntryInEachSlot + "', '" + WorkingDayList + "','" + BranchImage + "')", (error, results) => {
+        connection.query("CALL AddBranchDetail('" + UserID + "', '" + BranchName + "','" + CategoryID + "', '" + ClientID + "', '" + BranchPhoneNumber + "', '" + BranchEmailID + "'," + IsBranchSupervisor + ", '" + AdminPhoneNumber + "','" + BuildingNumber + "', '" + StreetName + "','" + City + "', '" + State + "','" + Country + "', '" + Pincode + "','" + Latitude + "', '" + Longitude + "','" + BranchStartTime + "', '" + BranchEndTime + "','" + SlotInMinutes + "', '" + MaximumBookingCount + "','" + EntryInEachSlot + "', '" + WorkingDayList + "','" + BranchImage + "')", (error, results) => {
             if (error) { next(createError.InternalServerError()) } else {
                 res.json({ data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {} })
             }
