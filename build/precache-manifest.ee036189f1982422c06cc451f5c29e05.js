@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "31266c4ab6c1a0b4395d6e4b6bc12cd2",
+    "revision": "80c4f4e46db47fef10ae68208b32129c",
     "url": "/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/2.99a5358a.chunk.css"
   },
   {
-    "revision": "488d34a4d66513ae9911",
-    "url": "/static/css/main.a450b668.chunk.css"
+    "revision": "7abc54b5a46bbaae4be7",
+    "url": "/static/css/main.a69a31a7.chunk.css"
   },
   {
     "revision": "5042342ed251f4f1ce7e",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.da149e4d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "488d34a4d66513ae9911",
-    "url": "/static/js/main.88fc0980.chunk.js"
+    "revision": "7abc54b5a46bbaae4be7",
+    "url": "/static/js/main.02f4cf5b.chunk.js"
   },
   {
     "revision": "b356f625be4accf4ab4f",
@@ -38,5 +38,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "081c1cf85df84355d815911a060fed75",
     "url": "/static/media/WEQ-logo.081c1cf8.svg"
+  },
+  {
+    "revision": "1b220f77158f48f5e9258355e08c7306",
+    "url": "/static/media/bgImage.1b220f77.svg"
   }
 ]);

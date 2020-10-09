@@ -64,6 +64,10 @@ app.use('/admin/slot', AdminSlotRoute)
 app.use('/superadmin/auth', SuperAdminAuthRoute)
 app.use('/superadmin/branch', SuperAdminBranchRoute)
 
+app.get('*',(req,res) =>{
+    res.sendFile(path.join(__dirname,'build/index.html'));
+});
+
 app.use(async (req, res, next) => {
     next(createError.NotFound())
 })
