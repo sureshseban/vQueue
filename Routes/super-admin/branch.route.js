@@ -64,6 +64,43 @@ router.post('/addbranch', async (req, res, next) => {
     }
 })
 
+router.post('/editbranch', async (req, res, next) => {
+    try {
+        const { UserID,
+            BranchID,
+            BranchName,
+            CategoryID,
+            ClientID,
+            BranchPhoneNumber,
+            BranchEmailID,
+            IsBranchSupervisor,
+            AdminPhoneNumber,
+            AdminUserID,
+            BuildingNumber,
+            StreetName,
+            City,
+            State,
+            Country,
+            Pincode,
+            Latitude,
+            Longitude,
+            BranchStartTime,
+            BranchEndTime,
+            SlotInMinutes,
+            MaximumBookingCount,
+            EntryInEachSlot,
+            WorkingDayList,
+            BranchImage } = req.body
+        connection.query("CALL EditBranchDetail('" + UserID + "', '" + BranchID + "','" + BranchName + "','" + CategoryID + "', '" + ClientID + "', '" + BranchPhoneNumber + "', '" + BranchEmailID + "'," + IsBranchSupervisor + ", '" + AdminPhoneNumber + "','" + AdminUserID + "','" + BuildingNumber + "', '" + StreetName + "','" + City + "', '" + State + "','" + Country + "', '" + Pincode + "','" + Latitude + "', '" + Longitude + "','" + BranchStartTime + "', '" + BranchEndTime + "','" + SlotInMinutes + "', '" + MaximumBookingCount + "','" + EntryInEachSlot + "', '" + WorkingDayList + "','" + BranchImage + "')", (error, results) => {
+            if (error) { next(createError.InternalServerError()) } else {
+                res.json({ data: results.length ? results[0] : [], config: results.length > 1 ? results[1] : {} })
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+})
+
 router.post('/getallbranches', async (req, res, next) => {
     try {
         const { UserID, ClientID } = req.body
