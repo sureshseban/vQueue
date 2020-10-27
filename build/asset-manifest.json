@@ -1,29 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.a69a31a7.chunk.css",
-    "main.js": "/static/js/main.02f4cf5b.chunk.js",
-    "main.js.map": "/static/js/main.02f4cf5b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.1ba291e1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.1ba291e1.js.map",
-    "static/css/2.99a5358a.chunk.css": "/static/css/2.99a5358a.chunk.css",
-    "static/js/2.da149e4d.chunk.js": "/static/js/2.da149e4d.chunk.js",
-    "static/js/2.da149e4d.chunk.js.map": "/static/js/2.da149e4d.chunk.js.map",
+    "main.css": "/static/css/main.3e000bcf.chunk.css",
+    "main.js": "/static/js/main.775e7020.chunk.js",
+    "main.js.map": "/static/js/main.775e7020.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a422d89f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a422d89f.js.map",
+    "static/css/2.a2d11417.chunk.css": "/static/css/2.a2d11417.chunk.css",
+    "static/js/2.3a1a502b.chunk.js": "/static/js/2.3a1a502b.chunk.js",
+    "static/js/2.3a1a502b.chunk.js.map": "/static/js/2.3a1a502b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ee036189f1982422c06cc451f5c29e05.js": "/precache-manifest.ee036189f1982422c06cc451f5c29e05.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.99a5358a.chunk.css.map": "/static/css/2.99a5358a.chunk.css.map",
-    "static/css/main.a69a31a7.chunk.css.map": "/static/css/main.a69a31a7.chunk.css.map",
-    "static/js/2.da149e4d.chunk.js.LICENSE.txt": "/static/js/2.da149e4d.chunk.js.LICENSE.txt",
-    "static/media/Pointer.svg": "/static/media/Pointer.bb4ed5c4.svg",
-    "static/media/Shopping Cart-ico.svg": "/static/media/Shopping Cart-ico.0f4db4a5.svg",
-    "static/media/WEQ-logo.svg": "/static/media/WEQ-logo.081c1cf8.svg",
-    "static/media/Login.css": "/static/media/bgImage.1b220f77.svg"
+    "static/css/2.a2d11417.chunk.css.map": "/static/css/2.a2d11417.chunk.css.map",
+    "static/css/main.3e000bcf.chunk.css.map": "/static/css/main.3e000bcf.chunk.css.map",
+    "static/js/2.3a1a502b.chunk.js.LICENSE.txt": "/static/js/2.3a1a502b.chunk.js.LICENSE.txt",
+    "static/media/Pointer.svg": "/static/media/Pointer.8648e8a6.svg",
+    "static/media/Shopping Cart-ico.svg": "/static/media/Shopping Cart-ico.a5a1f41b.svg",
+    "static/media/WEQ-logo.svg": "/static/media/WEQ-logo.7ec38a9a.svg",
+    "static/media/Login.css": "/static/media/bgImage.451deefe.svg",
+    "static/media/user.svg": "/static/media/user.43cd70fb.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.1ba291e1.js",
-    "static/css/2.99a5358a.chunk.css",
-    "static/js/2.da149e4d.chunk.js",
-    "static/css/main.a69a31a7.chunk.css",
-    "static/js/main.02f4cf5b.chunk.js"
+    "static/js/runtime-main.a422d89f.js",
+    "static/css/2.a2d11417.chunk.css",
+    "static/js/2.3a1a502b.chunk.js",
+    "static/css/main.3e000bcf.chunk.css",
+    "static/js/main.775e7020.chunk.js"
   ]
 }
